@@ -216,7 +216,7 @@ Nodes:
       EnableXTLS: false 
       SpeedLimit: 0 
       DeviceLimit: 3 
-      RuleListPath: # /etc/XrayR/rulelist
+      RuleListPath: # ./rulelist
     ControllerConfig:
       DisableSniffing: True
       ListenIP: 0.0.0.0 
