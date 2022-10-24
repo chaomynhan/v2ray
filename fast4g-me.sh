@@ -110,17 +110,17 @@ pre_install_docker_compose() {
     
     echo -e "Vui lòng nhập ID node và Domain"
     
-    read -p "Nhập Node ID port 80 :" node_80
-    echo -e "Node_80 là : ${node_80}"
+    read -p "Nhập Node ID port 80: " node_80
+    echo -e "Node_80 là: ${node_80}"
     
-    read -p "Nhập CertDomain port 80 :" CertDomain80
-    echo -e "CertDomain = ${CertDomain80}"
+    read -p "Nhập CertDomain port 80: " CertDomain80
+    echo -e "CertDomain 80 là: ${CertDomain80}"
     
-    read -p "Nhập Node ID port 443 :" node_443
+    read -p "Nhập Node ID port 443: " node_443
     echo -e "Node_80 là : ${node_443}"
     
-    read -p "Nhập CertDomain port 443 :" CertDomain443
-    echo -e "CertDomain = ${CertDomain443}"
+    read -p "Nhập CertDomain port 443: " CertDomain443
+    echo -e "CertDomain 443 là: ${CertDomain443}"
     
 }
  
