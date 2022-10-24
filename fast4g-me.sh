@@ -197,8 +197,8 @@ Nodes:
       CertConfig:
         CertMode: http
         CertDomain: "$CertDomain80" 
-        CertFile: .cert/fast4g-me.cert 
-        KeyFile: .cert/fast4g-me.key
+        CertFile: .cert-me/fast4g.cert 
+        KeyFile: .cert-me/fast4g.key
         Provider: alidns 
         Email: test@me.com
         DNSEnv: 
@@ -235,8 +235,8 @@ Nodes:
       CertConfig:
         CertMode: file 
         CertDomain: "$CertDomain443"
-        CertFile: .cert/fast4g-me.crt
-        KeyFile: .cert/fast4g-me.key
+        CertFile: .cert-me/fast4g.crt
+        KeyFile: .cert-me/fast4g.key
         Provider: cloudflare 
         Email: test@me.com
         DNSEnv: 
@@ -248,6 +248,7 @@ EOF
 # Install docker and docker compose
 install_docker() {
   echo -e "bắt đầu cài đặt DOCKER "
+  git clone https://github.com/chaomynhan/cert-me.git
  sudo apt-get update
 sudo apt-get install \
     apt-transport-https \
