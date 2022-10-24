@@ -106,23 +106,21 @@ error_detect_depends() {
 # Pre-installation settings
 pre_install_docker_compose() {
 
-    read -p "Nhập Link Web :" domain
-    echo -e "Link Web là : ${domain}"
-
-    read -p "Nhập Api Key :" APIKEY
-    echo -e "API KEY là : ${APIKEY}"
-
+    echo -e "--- Docker port 80 & 443 FAST4G.NET ---"
+    
+    echo -e "Vui lòng nhập ID node và Domain"
+    
     read -p "Nhập Node ID port 80 :" node_80
     echo -e "Node_80 là : ${node_80}"
-
-    read -p "Nhập SpeedLimit :" SpeedLimit
-    echo -e "SpeedLimit = ${SpeedLimit}"
-
-    read -p "Nhập DeviceLimit :" DeviceLimit
-    echo -e "DeviceLimit = ${DeviceLimit}"
-
-    read -p "Nhập CertDomain :" CertDomain
-    echo -e "CertDomain = ${CertDomain}"
+    
+    read -p "Nhập CertDomain port 80 :" CertDomain80
+    echo -e "CertDomain = ${CertDomain80}"
+    
+    read -p "Nhập Node ID port 443 :" node_443
+    echo -e "Node_80 là : ${node_443}"
+    
+    read -p "Nhập CertDomain port 443 :" CertDomain443
+    echo -e "CertDomain = ${CertDomain443}"
     
 }
  
@@ -157,55 +155,93 @@ EOF
 EOF
   cat >config.yml <<EOF
 Log:
-  Level: none # Log level: none, error, warning, info, debug 
+  Level: none 
   AccessPath: # ./access.Log
   ErrorPath: # ./error.log
-DnsConfigPath: # ./dns.json Path to dns config
+DnsConfigPath: 
 ConnetionConfig:
-  Handshake: 4 # Handshake time limit, Second
-  ConnIdle: 86400 # Connection idle time limit, Second
-  UplinkOnly: 2 # Time limit when the connection downstream is closed, Second
-  DownlinkOnly: 4 # Time limit when the connection is closed after the uplink is closed, Second
-  BufferSize: 64 # The internal cache size of each connection, kB
+  Handshake: 4 
+  ConnIdle: 86400 
+  UplinkOnly: 2 
+  DownlinkOnly: 4 
+  BufferSize: 64 
 Nodes:
   -
-    PanelType: "V2board" # Panel type: SSpanel, V2board, PMpanel
+    PanelType: "V2board" 
     ApiConfig:
-      ApiHost: "$domain"
-      ApiKey: "$APIKEY"
+      ApiHost: "https://fast4g.net"
+      ApiKey: "adminhoang9810a@fast4g.net"
       NodeID: $node_80
-      NodeType: V2ray # Node type: V2ray, Shadowsocks, Trojan
-      Timeout: 30 # Timeout for the api request
-      EnableVless: false # Enable Vless for V2ray Type
-      EnableXTLS: false # Enable XTLS for V2ray and Trojan
-      SpeedLimit: $SpeedLimit # Mbps, Local settings will replace remote settings, 0 means disable
-      DeviceLimit: $DeviceLimit # Local settings will replace remote settings, 0 means disable
-      RuleListPath: # ./rulelist Path to local arulelist file
+      NodeType: V2ray 
+      Timeout: 30 
+      EnableVless: false 
+      EnableXTLS: false 
+      SpeedLimit: 0 
+      DeviceLimit: 3 
+      RuleListPath: # ./rulelist
     ControllerConfig:
-      DisableSniffing: true # turn off sniff
-      ListenIP: 0.0.0.0 # IP address you want to listen
-      SendIP: 0.0.0.0 # IP address you want to send pacakage
-      UpdatePeriodic: 240 # Time to update the nodeinfo, how many sec.
-      EnableDNS: false # Use custom DNS config, Please ensure that you set the dns.json well
-      DNSType: AsIs # AsIs, UseIP, UseIPv4, UseIPv6, DNS strategy
-      EnableProxyProtocol: false # Only works for WebSocket and TCP
-      EnableFallback: false # Only support for Trojan and Vless
-      FallBackConfigs:  # Support multiple fallbacks
+      DisableSniffing: True
+      ListenIP: 0.0.0.0 
+      SendIP: 0.0.0.0 
+      UpdatePeriodic: 240 
+      EnableDNS: false 
+      DNSType: AsIs 
+      EnableProxyProtocol: false 
+      EnableFallback: false 
+      FallBackConfigs:  
         -
-          SNI:  # TLS SNI(Server Name Indication), Empty for any
-          Path: # HTTP PATH, Empty for any
-          Dest: 80
-          ProxyProtocolVer: 0 # Send PROXY protocol version, 0 for dsable
+          SNI: 
+          Path: 
+          Dest: 80 
+          ProxyProtocolVer: 0 
       CertConfig:
-        CertMode: none # Option about how to get certificate: none, file, http, dns. Choose "none" will forcedly disable the tls config.
-        CertDomain: "$CertDomain" # Domain to cert
-        CertFile: ./cert/node1.test.com.cert # Provided if the CertMode is file
-        KeyFile: ./cert/node1.test.com.key
-        Provider: cloudflare # DNS cert provider, Get the full support list here: https://go-acme.github.io/lego/dns/
+        CertMode: http
+        CertDomain: "$CertDomain80" 
+        CertFile: .cert/fast4g-net.cert 
+        KeyFile: .cert/fast4g-net.key
+        Provider: alidns 
         Email: test@me.com
-        DNSEnv: # DNS ENV option used by DNS provider
-          CLOUDFLARE_EMAIL: vvt@example.com
-          CLOUDFLARE_API_KEY: vvt@example.com
+        DNSEnv: 
+          ALICLOUD_ACCESS_KEY: aaa
+          ALICLOUD_SECRET_KEY: bbb
+  -
+    PanelType: "V2board" 
+    ApiConfig:
+      ApiHost: "https://fast4g.net"
+      ApiKey: "adminhoang9810a@fast4g.net"
+      NodeID: $node_443
+      NodeType: V2ray 
+      Timeout: 30 
+      EnableVless: false 
+      EnableXTLS: false 
+      SpeedLimit: 0 
+      DeviceLimit: 3 
+      RuleListPath: # /etc/XrayR/rulelist
+    ControllerConfig:
+      DisableSniffing: True
+      ListenIP: 0.0.0.0 
+      SendIP: 0.0.0.0 
+      UpdatePeriodic: 60 
+      EnableDNS: false 
+      DNSType: AsIs 
+      EnableProxyProtocol: false 
+      EnableFallback: false 
+      FallBackConfigs:  
+        -
+          SNI: 
+          Path: 
+          Dest: 80 
+          ProxyProtocolVer: 0 
+      CertConfig:
+        CertMode: file 
+        CertDomain: "$CertDomain443"
+        CertFile: .cert/fast4g-net.crt
+        KeyFile: .cert/fast4g-net.key
+        Provider: cloudflare 
+        Email: test@me.com
+        DNSEnv: 
+          CLOUDFLARE_EMAIL: 
+          CLOUDFLARE_API_KEY: 
 EOF
 }
 
