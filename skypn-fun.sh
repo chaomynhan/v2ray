@@ -106,7 +106,7 @@ error_detect_depends() {
 # Pre-installation settings
 pre_install_docker_compose() {
 
-    echo -e "--- Docker port 80 & 443 FAST4G.ME ---"
+    echo -e "--- Docker port 80 & 443 SKYPN.FUN ---"
     
     echo -e "Vui lòng nhập ID node và Domain"
     
@@ -169,8 +169,8 @@ Nodes:
   -
     PanelType: "V2board" 
     ApiConfig:
-      ApiHost: "https://fast4g.me"
-      ApiKey: "adminhoang9810a@fast4g.me"
+      ApiHost: "https://skypn.fun"
+      ApiKey: "adminskypn9810@skypn.fun"
       NodeID: $node_80
       NodeType: V2ray 
       Timeout: 30 
@@ -197,8 +197,8 @@ Nodes:
       CertConfig:
         CertMode: http
         CertDomain: "$CertDomain80" 
-        CertFile: .cert-me/fast4g.cert 
-        KeyFile: .cert-me/fast4g.key
+        CertFile: .cert-skypn/skypn.cert 
+        KeyFile: .cert-skypn/skypn.key
         Provider: alidns 
         Email: test@me.com
         DNSEnv: 
@@ -207,8 +207,8 @@ Nodes:
   -
     PanelType: "V2board" 
     ApiConfig:
-      ApiHost: "https://fast4g.me"
-      ApiKey: "adminhoang9810a@fast4g.me"
+      ApiHost: "https://skypn.fun"
+      ApiKey: "adminskypn9810@skypn.fun"
       NodeID: $node_443
       NodeType: V2ray 
       Timeout: 30 
@@ -235,8 +235,8 @@ Nodes:
       CertConfig:
         CertMode: file 
         CertDomain: "$CertDomain443"
-        CertFile: .cert-me/fast4g.crt
-        KeyFile: .cert-me/fast4g.key
+        CertFile: .cert-skypn/skypn.cert 
+        KeyFile: .cert-skypn/skypn.key
         Provider: cloudflare 
         Email: test@me.com
         DNSEnv: 
@@ -248,7 +248,7 @@ EOF
 # Install docker and docker compose
 install_docker() {
   echo -e "bắt đầu cài đặt DOCKER "
-  git clone https://github.com/chaomynhan/cert-me.git
+  git clone https://github.com/chaomynhan/cert-skypn.git
  sudo apt-get update
 sudo apt-get install \
     apt-transport-https \
