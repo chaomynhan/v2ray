@@ -106,7 +106,7 @@ error_detect_depends() {
 # Pre-installation settings
 pre_install_docker_compose() {
 
-    echo -e "--- Docker port 80 & 443 FAST4G.NET ---"
+    echo -e "--- Docker port 80 FAST4G.NET ---"
     
     echo -e "Vui lòng nhập ID node và Domain"
     
@@ -114,17 +114,8 @@ pre_install_docker_compose() {
     echo -e "Node_80 là : ${node_80}"
     
     read -p "Nhập CertDomain port 80 :" CertDomain80
-    echo -e "CertDomain = ${CertDomain80}"
-    
-    read -p "Nhập Node ID port 443 :" node_443
-    echo -e "Node_80 là : ${node_443}"
-    
-    read -p "Nhập CertDomain port 443 :" CertDomain443
-    echo -e "CertDomain = ${CertDomain443}"
-    
+    echo -e "CertDomain = ${CertDomain80}" 
 }
- 
-
 
 # Config docker
 config_docker() {
@@ -203,45 +194,7 @@ Nodes:
         Email: test@me.com
         DNSEnv: 
           ALICLOUD_ACCESS_KEY: aaa
-          ALICLOUD_SECRET_KEY: bbb
-  -
-    PanelType: "V2board" 
-    ApiConfig:
-      ApiHost: "https://fast4g.net"
-      ApiKey: "adminhoang9810a@fast4g.net"
-      NodeID: $node_443
-      NodeType: V2ray 
-      Timeout: 30 
-      EnableVless: false 
-      EnableXTLS: false 
-      SpeedLimit: 0 
-      DeviceLimit: 3 
-      RuleListPath: # ./rulelist
-    ControllerConfig:
-      DisableSniffing: True
-      ListenIP: 0.0.0.0 
-      SendIP: 0.0.0.0 
-      UpdatePeriodic: 60 
-      EnableDNS: false 
-      DNSType: AsIs 
-      EnableProxyProtocol: false 
-      EnableFallback: false 
-      FallBackConfigs:  
-        -
-          SNI: 
-          Path: 
-          Dest: 80 
-          ProxyProtocolVer: 0 
-      CertConfig:
-        CertMode: file 
-        CertDomain: "$CertDomain443"
-        CertFile: .cert-net/fast4g.crt
-        KeyFile: .cert-net/fast4g.key
-        Provider: cloudflare 
-        Email: test@me.com
-        DNSEnv: 
-          CLOUDFLARE_EMAIL: 
-          CLOUDFLARE_API_KEY: 
+          ALICLOUD_SECRET_KEY: bbb 
 EOF
 }
 
