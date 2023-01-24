@@ -106,7 +106,7 @@ error_detect_depends() {
 # Pre-installation settings
 pre_install_docker_compose() {
 
-    echo -e "--- Docker port 80 FAST4G.NET ---"
+    echo -e "--- Docker port 80 FAST4G.ME ---"
     
     echo -e "Vui lòng nhập ID node và Domain"
     
@@ -160,7 +160,7 @@ Nodes:
   -
     PanelType: "V2board" 
     ApiConfig:
-      ApiHost: "https://fast4g.net"
+      ApiHost: "https://fast4g.me"
       ApiKey: "adminhoang9810a@fast4g.net"
       NodeID: $node_80
       NodeType: V2ray 
